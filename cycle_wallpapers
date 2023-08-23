@@ -17,5 +17,5 @@ next_image () {
 
 while true; do
 	next_image
-	sleep 5m
+	sleep 1m
 done
