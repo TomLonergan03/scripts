@@ -3,16 +3,20 @@
 base_image_folder="/home/infernox/wallpapers/"
 
 next_image () {
-	favourite_next=$(shuf -i 0-3 -n 1)
-	if [ $favourite_next -eq 0 ]; then
-		image_folder="${base_image_folder}favourites/"
-	else
-		image_folder=$base_image_folder
-	fi
-	next_image_file=$(find $image_folder -type f | sort -R | tail -1)
-	hyprctl hyprpaper preload $next_image_file &> /dev/null
-	hyprctl hyprpaper wallpaper "eDP-1,${next_image_file}" &> /dev/null
-	hyprctl hyprpaper unload all &> /dev/null
-	}
+    favourite_next=$(shuf -i 0-3 -n 1)
+    if [ $favourite_next -eq 1 ]; then
+        image_folder="${base_image_folder}favourites/"
+    else
+        image_folder=$base_image_folder
+    fi
+    if [ $favourite_next -eq 0 ]; then
+        next_image_file=${base_image_folder}favourites/Quote.png
+    else
+        next_image_file=$(find $image_folder -type f | sort -R | tail -1)
+    fi
+    hyprctl hyprpaper preload $next_image_file &> /dev/null
+    hyprctl hyprpaper wallpaper "eDP-1,${next_image_file}" &> /dev/null
+    hyprctl hyprpaper unload all &> /dev/null
+}
 
 next_image
