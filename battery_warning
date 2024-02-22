@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+while true; do
+    CHARGE=$(cat /sys/class/power_supply/BAT0/capacity)
+    STATUS=$(cat /sys/class/power_supply/BAT0/status)
+    if [ $CHARGE -le 20 && $STATUS -eq Discharging ]; then
+        notify-send "Battery Warning" "Battery is at $CHARGE%" -i battery-caution --expire-time 5000 -u critical
+    fi
+    sleep 2m
+done
