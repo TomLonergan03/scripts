@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [ -z $1 ]; then
+    echo "Usage: $0 <time>"
+    exit 1
+fi
+
+if [ -z $2 ]; then
+    MESSAGE="Time is up"
+else
+    MESSAGE=$2
+fi
+
+(sleep $1; notify-send "Timer" "$MESSAGE" -i appointment-soon --expire-time 5000 -u critical) &
+
+echo "Timer set for $1"
