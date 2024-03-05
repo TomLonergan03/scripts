@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rm -rf /home/infernox/.config/Code/Service\ Worker/CacheStorage/*
+rm -rf /home/infernox/.cache/vscode-cpptools/*
