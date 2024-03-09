@@ -6,5 +6,9 @@ while true; do
     if [ $CHARGE -le 20 ] && [ $STATUS == "Discharging" ]; then
         notify-send "Battery Warning" "Battery is at $CHARGE%" -i battery-caution --expire-time 0 -u critical
     fi
-    sleep 2m
+    if [ $CHARGE -le 10 ]; then
+	    sleep 2m
+    else
+        sleep 5m
+    fi
 done
