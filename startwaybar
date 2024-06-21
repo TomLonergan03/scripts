@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CONFIG_FILES="$HOME/.config/waybar/config $HOME/.config/waybar/style.css"
+CONFIG_FILES="$HOME/.config/waybar/config $HOME/.config/waybar/style.css /etc/localtime"
 
 trap "killall waybar" EXIT
 
