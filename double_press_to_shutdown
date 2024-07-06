@@ -1,24 +1,18 @@
 #!/usr/bin/env bash
-NAME=$(basename $0)
-PID=$$
-PIDFILE=/tmp/$NAME.pid
+FILE=/tmp/shutdown
 
-trap "rm -f $PIDFILE" EXIT
+echo $PID $FILE
 
-if pidof -o %PPID -x $NAME >/dev/null; then
-    echo $PID > $PIDFILE
+if [ ! -f "$FILE" ]; then
+    echo shutdown > $FILE
+    notify-send "Shutdown" "Press shutdown again to confirm" -i application-exit --expire-time 5000 -u critical
     sleep 5s
+    rm $FILE
     exit 0
 fi
 
-notify-send "Shutdown" "Press shutdown again to confirm" -i application-exit --expire-time 5000 -u critical
-
-while [ $SECONDS -lt 5 ]; do
-    if [ -f "$PIDFILE" ]; then
-        OTHERPID=`cat $PIDFILE`
-        kill $OTHERPID
-        systemctl poweroff
-        exit 0
-    fi
-done
+if [ -f "$FILE" ]; then
+    rm $FILE
+    shutdown now
+fi
 exit 0
