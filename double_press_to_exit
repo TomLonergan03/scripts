@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+FILE=/tmp/shutdown
+
+echo $PID $FILE
+
+if [ ! -f "$FILE" ]; then
+    echo shutdown > $FILE
+    notify-send "Exit" "Press Super+M again to confirm" -i application-exit --expire-time 5000 -u critical
+    sleep 5s
+    rm $FILE
+    exit 0
+fi
+
+if [ -f "$FILE" ]; then
+    rm $FILE
+    hyprctl dispatch exit
+fi
+exit 0

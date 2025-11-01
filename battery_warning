@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 while true; do
-    CHARGE=$(cat /sys/class/power_supply/BAT0/capacity)
-    STATUS=$(cat /sys/class/power_supply/BAT0/status)
+    CHARGE=$(cat /sys/class/power_supply/BATT/capacity)
+    STATUS=$(cat /sys/class/power_supply/BATT/status)
     if [ $CHARGE -le 20 ] && [ $STATUS == "Discharging" ]; then
         notify-send "Battery Warning" "Battery is at $CHARGE%" -i battery-caution --expire-time 0 -u critical
     fi

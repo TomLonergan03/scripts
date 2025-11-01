@@ -17,7 +17,10 @@ next_image () {
         next_image_file=$(find $image_folder -type f | sort -R | tail -1)
     fi
     hyprctl hyprpaper preload $next_image_file &> /dev/null
-    hyprctl hyprpaper wallpaper "eDP-1,${next_image_file}" &> /dev/null
+    monitors=$(hyprctl monitors | grep Monitor | awk '{print $2}')
+    for monitor in $monitors; do
+        hyprctl hyprpaper wallpaper "${monitor},${next_image_file}" &> /dev/null
+    done
     sleep 0.1
     hyprctl hyprpaper unload all &> /dev/null
 }
